@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinJoy - Premium Skincare Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-lime: #8BC34A;
+            --dark-lime-hover: #7CB342;
+            --dark-lime-light: rgba(139, 195, 74, 0.1);
+            --white: #ffffff;
+            --dark-bg: #0a0a0a;
+            --gray-dark: #1a1a1a;
+            --gray-medium: #333333;
+            --text-light: #f5f5f5;
+            --text-gray: #cccccc;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--gray-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--dark-lime);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark-lime);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-lime);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="skincare" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23skincare)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--white), var(--dark-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--dark-lime);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-lime-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 195, 74, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--dark-bg);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: var(--gray-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--dark-lime);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 195, 74, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--dark-lime);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(139, 195, 74, 0.2);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark-lime-light), rgba(255, 255, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--dark-lime);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-price {
+            color: var(--dark-lime);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--gray-dark);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid var(--dark-lime);
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-gray);
+        }
+
+        .close:hover {
+            color: var(--dark-lime);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-lime);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(139, 195, 74, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--dark-lime);
+        }
+
+        /* Payment Form */
+        .payment-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            border: 1px solid rgba(139, 195, 74, 0.3);
+        }
+
+        .card-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card-row .form-group {
+            flex: 1;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(139, 195, 74, 0.2);
+            border: 2px solid var(--dark-lime);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            color: var(--dark-lime);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-lime);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--dark-lime);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-gray);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--dark-lime);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">SkinJoy</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>SkinJoy</h1>
+            <p>Experience premium skincare treatments and discover high-quality products that bring joy to your skin. Book your personalized session today.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="openBookingModal()">Book Session</button>
+                <a href="#products" class="btn btn-secondary">Shop Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Facial Treatments</h3>
+                    <p>Customized facial treatments using premium products to rejuvenate and refresh your skin.</p>
+                    <button class="btn btn-primary" onclick="openBookingModal('Facial Treatment')">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌿</div>
+                    <h3>Organic Skincare</h3>
+                    <p>Natural and organic skincare solutions tailored to your unique skin type and concerns.</p>
+                    <button class="btn btn-primary" onclick="openBookingModal('Organic Skincare')">Book Now</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💆</div>
+                    <h3>Anti-Aging Treatment</h3>
+                    <p>Advanced anti-aging treatments to restore youthful radiance and smooth fine lines.</p>
+                    <button class="btn btn-primary" onclick="openBookingModal('Anti-Aging Treatment')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Premium Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🧴</div>
+                    <div class="product-info">
+                        <h3>Hydrating Serum</h3>
+                        <p>Intensive hydration serum with hyaluronic acid for plump, moisturized skin.</p>
+                        <div class="product-price">R1,690</div>
+                        <button class="btn btn-primary" onclick="buyProduct('Hydrating Serum', 1690)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🌟</div>
+                    <div class="product-info">
+                        <h3>Vitamin C Brightening Cream</h3>
+                        <p>Brightening cream with vitamin C to even skin tone and boost radiance.</p>
+                        <div class="product-price">R1,235</div>
+                        <button class="btn btn-primary" onclick="buyProduct('Vitamin C Brightening Cream', 1235)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🌙</div>
+                    <div class="product-info">
+                        <h3>Night Renewal Complex</h3>
+                        <p>Overnight treatment to repair and regenerate skin while you sleep.</p>
+                        <div class="product-price">R2,280</div>
+                        <button class="btn btn-primary" onclick="buyProduct('Night Renewal Complex', 2280)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">☀️</div>
+                    <div class="product-info">
+                        <h3>SPF 50 Daily Protection</h3>
+                        <p>Broad-spectrum sunscreen with moisturizing properties for daily protection.</p>
+                        <div class="product-price">R855</div>
+                        <button class="btn btn-primary" onclick="buyProduct('SPF 50 Daily Protection', 855)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+            <h2>Book Your Session</h2>
+            <div class="success-message" id="bookingSuccess">
+                ✅ Session booked successfully! Admin has been notified via email.
+            </div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="service">Service</label>
+                    <select id="service" required>
+                        <option value="">Select a service</option>
+                        <option value="Facial Treatment">Facial Treatment - R2,850</option>
+                        <option value="Organic Skincare">Organic Skincare - R2,280</option>
+                        <option value="Anti-Aging Treatment">Anti-Aging Treatment - R3,800</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Preferred Time</label>
+                    <select id="time" required>
+                        <option value="">Select time</option>
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                        <option value="3:00 PM">3:00 PM</option>
+                        <option value="5:00 PM">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="clientName">Full Name</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email</label>
+                    <input type="email" id="clientEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Phone Number</label>
+                    <input type="tel" id="clientPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Special Requests (Optional)</label>
+                    <textarea id="notes" rows="3" placeholder="Any specific concerns or requests..."></textarea>
+                </div>
+                
+                <div class="payment-form">
+                    <h3 style="color: var(--dark-lime); margin-bottom: 1rem;">Payment Information</h3>
+                    <div class="form-group">
+                        <label for="cardName">Cardholder Name</label>
+                        <input type="text" id="cardName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book & Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('purchaseModal')">&times;</span>
+            <h2>Complete Purchase</h2>
+            <div class="success-message" id="purchaseSuccess">
+                ✅ Purchase completed successfully! Thank you for shopping with SkinJoy.
+            </div>
+            <div id="productDetails" style="background: rgba(139, 195, 74, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;"></div>
+            <form id="purchaseForm">
+                <div class="form-group">
+                    <label for="buyerName">Full Name</label>
+                    <input type="text" id="buyerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyerEmail">Email</label>
+                    <input type="email" id="buyerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyerAddress">Shipping Address</label>
+                    <textarea id="buyerAddress" rows="3" required></textarea>
+                </div>
+                
+                <div class="payment-form">
+                    <h3 style="color: var(--dark-lime); margin-bottom: 1rem;">Payment Information</h3>
+                    <div class="form-group">
+                        <label for="purchaseCardName">Cardholder Name</label>
+                        <input type="text" id="purchaseCardName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="purchaseCardNumber">Card Number</label>
+                        <input type="text" id="purchaseCardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group">
+                            <label for="purchaseExpiry">Expiry Date</label>
+                            <input type="text" id="purchaseExpiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="purchaseCvv">CVV</label>
+                            <input type="text" id="purchaseCvv" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkinJoy</h3>
+                    <p>Premium skincare treatments and products for a joyful skin experience.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 +27 65 983 1050</p>
+                    <p>📧 Ndobelaj@gmail.com</p>
+                    <p>📍 123 Beauty Avenue, Spa City, SC 12345</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                    <p>Saturday: 10:00 AM - 6:00 PM</p>
+                    <p>Sunday: 11:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <p>&copy; 2025 SkinJoy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+        });
+
+        // Modal functions
+        function openBookingModal(service = '') {
+            document.getElementById('bookingModal').style.display = 'flex';
+            if (service) {
+                document.getElementById('service').value = service;
+            }
+            document.getElementById('bookingSuccess').style.display = 'none';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function buyProduct(productName, price) {
+            document.getElementById('purchaseModal').style.display = 'flex';
+            document.getElementById('productDetails').innerHTML = `
+                <h3 style="color: var(--dark-lime);">${productName}</h3>
+                <p style="font-size: 1.2rem; margin-top: 0.5rem;">Price: R${price}</p>
+            `;
+            document.getElementById('purchaseSuccess').style.display = 'none';
+        }
+
+        // Form submissions
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate booking process
+            setTimeout(() => {
+                document.getElementById('bookingSuccess').style.display = 'block';
+                
+                // Simulate email notification to admin
+                console.log('📧 Email sent to admin: New booking received');
+                console.log('Booking details:', {
+                    service: document.getElementById('service').value,
+                    date: document.getElementById('date').value,
+                    time: document.getElementById('time').value,
+                    client: document.getElementById('clientName').value,
+                    email: document.getElementById('clientEmail').value,
+                    phone: document.getElementById('clientPhone').value
+                });
+                
+                // Reset form
+                this.reset();
+            }, 1000);
+        });
+
+        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate purchase process
+            setTimeout(() => {
+                document.getElementById('purchaseSuccess').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+            }, 1000);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            if (formattedValue.length <= 19) {
+                e.target.value = formattedValue;
+            }
+        });
+
+        document.getElementById('purchaseCardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            if (formattedValue.length <= 19) {
+                e.target.value = formattedValue;
+            }
+        });
+
+        // Expiry date formatting
+        function formatExpiry(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+
+        formatExpiry(document.getElementById('expiry'));
+        formatExpiry(document.getElementById('purchaseExpiry'));
+
+        // CVV formatting
+        function formatCVV(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+            });
+        }
+
+        formatCVV(document.getElementById('cvv'));
+        formatCVV(document.getElementById('purchaseCvv'));
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
